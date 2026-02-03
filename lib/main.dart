@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'Update & modify Counter App'),
     );
   }
@@ -41,6 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter(){
+    setState(() {
+      if(_counter > 0){
+        _counter--;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -55,19 +64,53 @@ class _MyHomePageState extends State<MyHomePage> {
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
+            const Text('Counter App:',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [SizedBox(height: 70),
+                ElevatedButton(onPressed: _incrementCounter,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      fixedSize: Size(120, 40)
+                    ),
+                    child: Text("Increment")),
+
+                SizedBox(width: 20),
+                ElevatedButton(onPressed: _decrementCounter,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        fixedSize: Size(120, 40),
+                    ),
+                    child: Text("Decrement")),
+
+                SizedBox(width: 20),
+                ElevatedButton(onPressed: (){setState(() {
+                  _counter = 0;
+                });},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        fixedSize: Size(120, 40)
+                    ),
+                    child: Text("Reset"))
+              ],
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
