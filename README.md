@@ -1,4 +1,4 @@
-# flutter_project
+# tasbih_counter
 
 A new Flutter project.
 
